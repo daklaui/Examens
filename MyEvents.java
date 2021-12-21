@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 
 public class MyEvents implements ActionListener {
     MyForm form ;
+    MyDataBase myDataBase;
 
     public MyEvents(MyForm form) {
         this.form = form;
