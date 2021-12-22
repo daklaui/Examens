@@ -11,10 +11,9 @@ public class MyEvents implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Si l'action sur le boutton "Valider"
-        if(e.getSource()==this.form.ajouter)
+        if(e.getSource()==this.form.valider)
         {
-
+            myDataBase.ajouter(new Personne(this.form.nomI.getText(), this.form.prenomI.getText()));
         }
 
     }
