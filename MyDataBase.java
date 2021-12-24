@@ -52,7 +52,6 @@ public class MyDataBase {
     {
         try
         {
-
             int resUpd=stm.executeUpdate("INSERT INTO utilisateurs (nom, genre) VALUES ('"+personne.getNom()+"','"+personne.getGenre()+"')");
             return resUpd;
         }
@@ -67,7 +66,6 @@ public class MyDataBase {
             model.setRowCount(0);
             this.res = this.stm.executeQuery("select * from utilisateurs");
             Object[] ligne = new Object[model.getColumnCount()];
-
             while(this.res.next()) {
                 for(int i = 0; i < ligne.length; ++i) {
                     ligne[i] = this.res.getString(i+1);

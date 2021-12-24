@@ -45,7 +45,7 @@ public class MyList extends JFrame{
     }
     public void axesXY(int nbrPersonneH, int nbrPersonneF, String labelX,String labelY){
         int rightX = chartX + chartWidth;
-        int topY = chartY - chartHeight -100;
+        int topY = chartY - 150;
         Point southWest= new Point(chartX, chartY);
         Point northEast = new Point(rightX, chartY);
         graphe.draw(new Line2D.Double(southWest, northEast));
@@ -55,18 +55,14 @@ public class MyList extends JFrame{
         graphe.draw(new Line2D.Double(southWest1, northEast1));
         drawArrowHead(graphe, northEast1, southWest1, Color.green);
         graphe.setColor(Color.red);
-        graphe.drawString(labelY, chartWidth, chartY + 18) ;
-
-        Font original = graphe.getFont();
-
-        Font font = new Font(null, original.getStyle(), original.getSize());
+        graphe.drawString(labelX, chartWidth, chartY + 18) ;
         AffineTransform affineTransform = new AffineTransform();
         affineTransform.rotate(Math.toRadians(-90), 0, 0);
+        Font original = graphe.getFont();
+        Font font = new Font(null, original.getStyle(), original.getSize());
         Font rotatedFont = font.deriveFont(affineTransform);
         graphe.setFont(rotatedFont);
-        graphe.drawString(labelX,18, chartY - chartHeight/2);
-        graphe.setFont(original);
-        graphe.setColor(Color.red);
+        graphe.drawString(labelY,18, chartY - 25);
     }
 
     public void histogarmme (int number, Color color, int margin) {
