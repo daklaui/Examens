@@ -11,7 +11,6 @@ public class MyThread extends Thread{
                 this.myList.remplirTab();
                 sleep(1000);
 
-
             } catch (Exception var3) {
                 System.out.println(var3);
             }

@@ -62,32 +62,6 @@ public class MyDataBase {
         }
         return 0;
     }
-    public int Supprimer(int id)
-    {
-        try
-        {
-            int resUpd=stm.executeUpdate("DELETE FROM personne WHERE id="+id);
-            return resUpd;
-        }
-        catch(SQLException e)
-        {
-            System.err.println("Error executing query: " + e);
-        }
-        return 0;
-    }
-    public int Modifier(int id, String nom, String genre)
-    {
-        try
-        {
-            int resUpd=stm.executeUpdate("UPDATE personne set nom='"+nom+"', genre='"+genre+"' WHERE id="+id);
-            return resUpd;
-        }
-        catch(SQLException e)
-        {
-            System.err.println("Error executing query: " + e);
-        }
-        return 0;
-    }
     public void remplirTab(DefaultTableModel model) {
         try {
             model.setRowCount(0);

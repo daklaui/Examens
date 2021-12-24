@@ -5,7 +5,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
 public class MyList extends JFrame{
-    String entete[] = {"ID","Nom","Genre"};
     DefaultTableModel model;
     JTable table ;
     JPanel chart;
@@ -14,12 +13,13 @@ public class MyList extends JFrame{
     MyThread myThread;
     Graphics2D graphe;
     JFrame frame;
+    String header[] = {"ID","Nom","Genre"};
     private final double phi = Math.toRadians(40);
     private final int barb = 20;
-    private int chartwidth, chartheight, chartX, chartY;
+    private int chartWidth, chartHeight, chartX, chartY;
     public MyList() {
         myDataBase = new MyDataBase();
-        model = new DefaultTableModel(entete,0);
+        model = new DefaultTableModel(header,0);
         table= new JTable(model);
         chart = new JPanel();
         sp = new JScrollPane();
@@ -28,35 +28,34 @@ public class MyList extends JFrame{
 
 
     }
-    private void drawArrowHead(Graphics2D g2, Point tip, Point tail, Color color)
+    private void drawArrowHead(Graphics2D g2, Point p1, Point p2, Color color)
     {
         g2.setPaint(color);
-        double dy = tip.y - tail.y;
-        double dx = tip.x - tail.x;
+        double dy = p1.y - p2.y;
+        double dx = p1.x - p2.x;
         double theta = Math.atan2(dy, dx);
         double x, y, rho = theta + phi;
         for(int j = 0; j < 2; j++)
         {
-            x = tip.x - barb * Math.cos(rho);
-            y = tip.y - barb * Math.sin(rho);
-            g2.draw(new Line2D.Double(tip.x, tip.y, x, y));
+            x = p1.x - barb * Math.cos(rho);
+            y = p1.y - barb * Math.sin(rho);
+            g2.draw(new Line2D.Double(p1.x, p1.y, x, y));
             rho = theta - phi;
         }
     }
-    public void drawChart(){
-        int rightX = chartX + chartwidth;
-        int topY = chartY - chartheight -100;
-        Point sw = new Point(chartX, chartY);
-        Point ne = new Point(rightX, chartY);
-        graphe.draw(new Line2D.Double(sw, ne));
-        drawArrowHead(graphe, ne, sw, Color.green);
-
-        Point sw1 = new Point(chartX, chartY );
-        Point ne1 = new Point(chartX, topY);
-        graphe.draw(new Line2D.Double(sw1, ne1));
-        drawArrowHead(graphe, ne1, sw1, Color.green);
+    public void axesXY(int nbrPersonneH, int nbrPersonneF, String labelX,String labelY){
+        int rightX = chartX + chartWidth;
+        int topY = chartY - chartHeight -100;
+        Point southWest= new Point(chartX, chartY);
+        Point northEast = new Point(rightX, chartY);
+        graphe.draw(new Line2D.Double(southWest, northEast));
+        drawArrowHead(graphe, northEast, southWest, Color.green);
+        Point southWest1 = new Point(chartX, chartY );
+        Point northEast1 = new Point(chartX, topY);
+        graphe.draw(new Line2D.Double(southWest1, northEast1));
+        drawArrowHead(graphe, northEast1, southWest1, Color.green);
         graphe.setColor(Color.red);
-        graphe.drawString("Genre", chartwidth, chartY + 18) ;
+        graphe.drawString(labelY, chartWidth, chartY + 18) ;
 
         Font original = graphe.getFont();
 
@@ -65,18 +64,16 @@ public class MyList extends JFrame{
         affineTransform.rotate(Math.toRadians(-90), 0, 0);
         Font rotatedFont = font.deriveFont(affineTransform);
         graphe.setFont(rotatedFont);
-        graphe.drawString("Number",18, chartY - chartheight/2);
+        graphe.drawString(labelX,18, chartY - chartHeight/2);
         graphe.setFont(original);
         graphe.setColor(Color.red);
-
     }
 
-    public void drawRectangle(String hommeNumber, Color color, int margin) {
-        int height = Integer.parseInt(hommeNumber);
+    public void histogarmme (int number, Color color, int margin) {
         int barWidth = 50;
         int xLeft = 50 + margin;
-        int yTopLeft = chartY - height;
-        Rectangle rec = new Rectangle(xLeft, yTopLeft, barWidth, height);
+        int yTopLeft = chartY - number;
+        Rectangle rec = new Rectangle(xLeft, yTopLeft, barWidth, number);
         graphe.setColor(color);
         graphe.fill(rec);
 
@@ -88,7 +85,6 @@ public class MyList extends JFrame{
         frame.setSize(800,600);
         frame.setLocationByPlatform(true);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
         sp.getViewport().add(table);
         sp.setPreferredSize(new Dimension(800,400));
 
@@ -100,11 +96,9 @@ public class MyList extends JFrame{
         Container c=frame.getContentPane();
         c.setLayout(new BorderLayout());
         c.add("Center",panelTable);
-
         frame.setVisible(true);
-
-
         remplirTab();
+
         myThread.start();
 
     }
@@ -112,16 +106,18 @@ public class MyList extends JFrame{
         int width = chart.getWidth();
         int height = chart.getHeight();
         myDataBase.remplirTab(model);
-        chartheight = Integer.parseInt(myDataBase.getPersonnes());
-        chartwidth = width - 100;
+        chartHeight = Integer.parseInt(myDataBase.getPersonnes());
+        chartWidth = width - 150;
         chartX = 25;
         chartY = height - 30;
         graphe=(Graphics2D)chart.getGraphics();
         String hommeNumber = myDataBase.getPersonneByGenre("Homme");
         String FemmeNumber = myDataBase.getPersonneByGenre("Femme");
-        drawRectangle(hommeNumber,Color.blue,0);
-        drawRectangle(FemmeNumber,Color.pink,60);
-        drawChart();
+        histogarmme(Integer.parseInt(hommeNumber),Color.blue,0);
+        histogarmme(Integer.parseInt(FemmeNumber),Color.pink,60);
+        axesXY(Integer.parseInt(hommeNumber), Integer.parseInt(FemmeNumber), "Genre","NbrPersonne");
+
+
 
     }
 }
