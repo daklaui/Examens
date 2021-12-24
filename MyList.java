@@ -69,7 +69,7 @@ public class MyList extends JFrame{
         int barWidth = 50;
         int xLeft = 50 + margin;
         int yTopLeft = chartY - number;
-        Rectangle rec = new Rectangle(xLeft, yTopLeft-100, barWidth, number+100);
+        Rectangle rec = new Rectangle(xLeft, yTopLeft, barWidth, number);
         graphe.setColor(color);
         graphe.fill(rec);
 
@@ -78,14 +78,14 @@ public class MyList extends JFrame{
 
     public void initScreen(){
         frame =new JFrame("My List");
-        frame.setSize(800,400);
+        frame.setSize(800,600);
         frame.setLocationByPlatform(true);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         sp.getViewport().add(table);
-        sp.setPreferredSize(new Dimension(800,200));
+        sp.setPreferredSize(new Dimension(800,400));
 
         JPanel panelTable = new JPanel(new GridLayout(2,1));
-        chart.setSize(800,400);
+        chart.setSize(800,600);
         panelTable.add(sp);
         panelTable.add(chart);
         chart.setBackground(Color.BLACK);

@@ -4,7 +4,7 @@ import java.sql.*;
 public class MyDataBase {
 
     private final String pilote = "com.mysql.jdbc.Driver";
-    private final String url ="jdbc:mysql://localhost/examensdb";
+    private final String url ="jdbc:mysql://localhost/java_mini-projet";
     private final String nom_utilisateur ="root";
     private final String password = "";
     private Connection maConnection;
@@ -64,8 +64,9 @@ public class MyDataBase {
     public void remplirTab(DefaultTableModel model) {
         try {
             model.setRowCount(0);
-            this.res = this.stm.executeQuery("select * from utilisateurs");
+            this.res = this.stm.executeQuery("select * from personne");
             Object[] ligne = new Object[model.getColumnCount()];
+
             while(this.res.next()) {
                 for(int i = 0; i < ligne.length; ++i) {
                     ligne[i] = this.res.getString(i+1);
@@ -80,7 +81,7 @@ public class MyDataBase {
     public String getPersonneByGenre(String genre)  {
         String result ="";
         try {
-            this.res = this.stm.executeQuery("select count(*) from utilisateurs where genre ='"+genre+"'");
+            this.res = this.stm.executeQuery("select count(*) from personne where genre ='"+genre+"'");
             while (this.res.next()) {
                 result = this.res.getString(1);
             }
@@ -97,7 +98,7 @@ public class MyDataBase {
     public String getPersonnes()  {
         String result ="";
         try {
-            this.res = this.stm.executeQuery("select count(*) from utilisateurs");
+            this.res = this.stm.executeQuery("select count(*) from personne");
             while (this.res.next()) {
                 result = this.res.getString(1);
             }

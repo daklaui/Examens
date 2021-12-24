@@ -26,22 +26,6 @@ public class MyEvents implements ActionListener {
             }
 
         }
-        //Boutton Supprimer
-//        if(e.getSource()==supprimer)
-//        {
-//            if(myDataBase.Supprimer(Integer.parseInt(idT.getText()))>0)
-//                JOptionPane.showMessageDialog(null, "Suppression effectu�e");
-//            else
-//                JOptionPane.showMessageDialog(null, "Echec de Suppression");
-//        }
-//        //Boutton Modifier
-//        if(e.getSource()==modifier)
-//        {
-//            if(myDataBase.Modifier(Integer.parseInt(idT.getText()), nomT.getText(), prenomT.getText(), adresseT.getSelectedItem().toString())>0)
-//                JOptionPane.showMessageDialog(null, "Modification effectu�e");
-//            else
-//                JOptionPane.showMessageDialog(null, "Echec de Mise � jour");
-//        }
 
     }
 }
