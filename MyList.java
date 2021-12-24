@@ -45,7 +45,7 @@ public class MyList extends JFrame{
     }
     public void drawChart(){
         int rightX = chartX + chartwidth;
-        int topY = chartY - chartheight;
+        int topY = chartY - chartheight -100;
         Point sw = new Point(chartX, chartY);
         Point ne = new Point(rightX, chartY);
         graphe.draw(new Line2D.Double(sw, ne));
@@ -76,7 +76,7 @@ public class MyList extends JFrame{
         int barWidth = 50;
         int xLeft = 50 + margin;
         int yTopLeft = chartY - height;
-        Rectangle rec = new Rectangle(xLeft, yTopLeft, barWidth, height);
+        Rectangle rec = new Rectangle(xLeft, yTopLeft-100, barWidth, height+100);
         graphe.setColor(color);
         graphe.fill(rec);
 
