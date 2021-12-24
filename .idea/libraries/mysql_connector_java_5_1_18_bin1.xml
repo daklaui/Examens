@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mysql-connector-java-5.1.18-bin1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Java 2 VF 2021-2022/TP GUI + Events + DataBase + Graphics + Thread/Partie 3- La Base des données/mysql-connector-java-5.1.18/mysql-connector-java-5.1.18-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
