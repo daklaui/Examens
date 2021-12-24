@@ -65,7 +65,7 @@ public class MyList extends JFrame{
         affineTransform.rotate(Math.toRadians(-90), 0, 0);
         Font rotatedFont = font.deriveFont(affineTransform);
         graphe.setFont(rotatedFont);
-        graphe.drawString("Nbr",18, chartY - chartheight/2);
+        graphe.drawString("Number",18, chartY - chartheight/2);
         graphe.setFont(original);
         graphe.setColor(Color.red);
 
@@ -76,7 +76,7 @@ public class MyList extends JFrame{
         int barWidth = 50;
         int xLeft = 50 + margin;
         int yTopLeft = chartY - height;
-        Rectangle rec = new Rectangle(xLeft, yTopLeft-100, barWidth, height+100);
+        Rectangle rec = new Rectangle(xLeft, yTopLeft, barWidth, height);
         graphe.setColor(color);
         graphe.fill(rec);
 
@@ -85,15 +85,15 @@ public class MyList extends JFrame{
 
     public void initScreen(){
         frame =new JFrame("My List");
-        frame.setSize(800,400);
+        frame.setSize(800,600);
         frame.setLocationByPlatform(true);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         sp.getViewport().add(table);
-        sp.setPreferredSize(new Dimension(800,200));
+        sp.setPreferredSize(new Dimension(800,400));
 
         JPanel panelTable = new JPanel(new GridLayout(2,1));
-        chart.setSize(800,400);
+        chart.setSize(800,600);
         panelTable.add(sp);
         panelTable.add(chart);
         chart.setBackground(Color.BLACK);
@@ -113,7 +113,7 @@ public class MyList extends JFrame{
         int height = chart.getHeight();
         myDataBase.remplirTab(model);
         chartheight = Integer.parseInt(myDataBase.getPersonnes());
-        chartwidth = width - 150;
+        chartwidth = width - 100;
         chartX = 25;
         chartY = height - 30;
         graphe=(Graphics2D)chart.getGraphics();

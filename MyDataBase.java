@@ -4,7 +4,7 @@ import java.sql.*;
 public class MyDataBase {
 
     private final String pilote = "com.mysql.jdbc.Driver";
-    private final String url ="jdbc:mysql://localhost/examensdb";
+    private final String url ="jdbc:mysql://localhost/java_mini-projet";
     private final String nom_utilisateur ="root";
     private final String password = "";
     private Connection maConnection;
@@ -53,7 +53,7 @@ public class MyDataBase {
         try
         {
 
-            int resUpd=stm.executeUpdate("INSERT INTO utilisateurs (nom, genre) VALUES ('"+personne.getNom()+"','"+personne.getGenre()+"')");
+            int resUpd=stm.executeUpdate("INSERT INTO personne (nom, genre) VALUES ('"+personne.getNom()+"','"+personne.getGenre()+"')");
             return resUpd;
         }
         catch(SQLException e)
@@ -66,7 +66,7 @@ public class MyDataBase {
     {
         try
         {
-            int resUpd=stm.executeUpdate("DELETE FROM utilisateurs WHERE id="+id);
+            int resUpd=stm.executeUpdate("DELETE FROM personne WHERE id="+id);
             return resUpd;
         }
         catch(SQLException e)
@@ -79,7 +79,7 @@ public class MyDataBase {
     {
         try
         {
-            int resUpd=stm.executeUpdate("UPDATE utilisateurs set nom='"+nom+"', genre='"+genre+"' WHERE id="+id);
+            int resUpd=stm.executeUpdate("UPDATE personne set nom='"+nom+"', genre='"+genre+"' WHERE id="+id);
             return resUpd;
         }
         catch(SQLException e)
@@ -91,7 +91,7 @@ public class MyDataBase {
     public void remplirTab(DefaultTableModel model) {
         try {
             model.setRowCount(0);
-            this.res = this.stm.executeQuery("select * from utilisateurs");
+            this.res = this.stm.executeQuery("select * from personne");
             Object[] ligne = new Object[model.getColumnCount()];
 
             while(this.res.next()) {
@@ -108,7 +108,7 @@ public class MyDataBase {
     public String getPersonneByGenre(String genre)  {
         String result ="";
         try {
-            this.res = this.stm.executeQuery("select count(*) from utilisateurs where genre ='"+genre+"'");
+            this.res = this.stm.executeQuery("select count(*) from personne where genre ='"+genre+"'");
             while (this.res.next()) {
                 result = this.res.getString(1);
             }
@@ -125,7 +125,7 @@ public class MyDataBase {
     public String getPersonnes()  {
         String result ="";
         try {
-            this.res = this.stm.executeQuery("select count(*) from utilisateurs");
+            this.res = this.stm.executeQuery("select count(*) from personne");
             while (this.res.next()) {
                 result = this.res.getString(1);
             }
